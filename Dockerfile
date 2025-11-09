@@ -1,12 +1,11 @@
-# Use the official .NET SDK image
+# -------- STAGE 1: Build --------
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-
-WORKDIR /app
-
-# Copy your app source from Jenkins workspace
+WORKDIR /src
 COPY DieRollerApp/ .
+RUN dotnet publish -c Release -o /app/publish
 
-# Build and run
-RUN dotnet build -c Release
-
-CMD ["dotnet", "run", "--configuration", "Release"]
+# -------- STAGE 2: Runtime --------
+FROM mcr.microsoft.com/dotnet/runtime:9.0
+WORKDIR /app
+COPY --from=build /app/publish .
+ENTRYPOINT ["dotnet", "DieRollerApp.dll"]
