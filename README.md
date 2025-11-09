@@ -44,6 +44,3 @@ RUN dotnet new console -n DieRollerApp --force && \
     cd DieRollerApp && dotnet build
 
 CMD ["dotnet", "DieRollerApp/bin/Debug/net8.0/DieRollerApp.dll"]
-
-**How to Build and Run
-Step 1 — Build the Docker image**
