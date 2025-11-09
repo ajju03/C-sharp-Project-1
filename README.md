@@ -75,9 +75,8 @@ Press Enter key to roll ->
 
 ## 🐳 Docker Image Info
 
-Base Image: mcr.microsoft.com/dotnet/sdk:8.0
-App Directory: /app
-Build Command: dotnet build
-Run Command: dotnet DieRollerApp.dll
-
+- **Base Image:** `mcr.microsoft.com/dotnet/sdk:8.0`  
+- **App Directory:** `/app`  
+- **Build Command:** `dotnet build`  
+- **Run Command:** `dotnet DieRollerApp.dll`
 
