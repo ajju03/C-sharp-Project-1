@@ -1,18 +1,18 @@
 # Use the official .NET SDK image to build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
+# Set working directory
 WORKDIR /app
 
-# Copy all files from Jenkins workspace to container
+# Copy all files from your GitHub repo (Jenkins workspace)
 COPY . .
 
-# Create the project and replace Program.cs with your own
+# Create a new console app and build your custom C# file inside it
 RUN dotnet new console -n DieRollerApp --force \
     && rm DieRollerApp/Program.cs \
-    && mv /app/dieRoller.cs /app/DieRollerApp/ \
-    && cd /app/DieRollerApp \
-    && dotnet build
+    && mv dieRoller.cs DieRollerApp/ \
+    && cd DieRollerApp \
+    && dotnet build -c Release
 
-# Set the default command to run the compiled app
-CMD ["dotnet", "DieRollerApp/bin/Debug/net8.0/DieRollerApp.dll"]
-
+# Optional: Set the default command to run the app
+CMD ["dotnet", "DieRollerApp/bin/Release/net8.0/DieRollerApp.dll"]
